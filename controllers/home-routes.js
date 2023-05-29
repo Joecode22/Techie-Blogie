@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET one post
-router.get('/post/:id', async (req, res) => {
+router.get('/post/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -39,7 +39,7 @@ router.get('/post/:id', async (req, res) => {
 
     const post = postData.get({ plain: true });
 
-    res.render('dashboard', { // assuming the individual post page is the dashboard
+    res.render('dashboard', { 
       ...post,
       logged_in: req.session.logged_in
     });
