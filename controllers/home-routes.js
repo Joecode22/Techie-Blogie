@@ -68,4 +68,15 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
+router.get('/dashboard', (req, res) => {
+  // Add code here to handle the dashboard display
+  // For example, you might check if a user is logged in and 
+  // then display different information based on their user status
+  if (req.session.logged_in) {
+    res.render('dashboard', {loggedIn: true}); //Assuming you have a "dashboard" view setup
+  } else {
+    res.redirect('/login'); // redirect to login page if not logged in
+  }
+});
+
 module.exports = router;
