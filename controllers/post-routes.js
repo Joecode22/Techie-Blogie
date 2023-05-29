@@ -71,3 +71,40 @@ router.get('/:id', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+//this post route is used to create a new post 
+router.post('/', async (req, res) => {
+    try {
+        const newPost = await Post.create({
+            ...req.body,
+            user_id: req.session.user_id,
+        });
+
+        res.status(200).json(newPost);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+//this put route will update a post 
+router.put('/:id', async (req, res) => {
+    try {
+        const postData = await Post.update({
+            title: req.body.title,
+            content: req.body.content,
+        }, {
+            where: {
+                id: req.params.id,
+            },
+        });
+
+        if (!postData) {
+            res.status(404).json({ message: 'Error - no post with this id' });
+            return;
+        }
+
+        res.status(200).json(postData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
