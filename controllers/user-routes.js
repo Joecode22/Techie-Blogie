@@ -4,6 +4,7 @@ const { User } = require('../models');
 
 // POST request for user signup
 router.post('/signup', async (req, res) => {
+    console.log('This is the first line of the /signup route');
     try {
         // we declare a new variable called userData that will await the creation of a new user with the req.body passed in as the argument
         const userData = await User.create(req.body);
@@ -16,6 +17,7 @@ router.post('/signup', async (req, res) => {
             res.status(200).json(userData);
         });
     } catch (err) {
+        console.log('You are inside the error message of the /signup route');
         res.status(400).json(err);
     }
 });

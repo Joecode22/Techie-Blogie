@@ -4,7 +4,7 @@ document.querySelector('form').addEventListener('submit', async (event) => {
     const username = document.querySelector('#username').value;
     const password = document.querySelector('#password').value;
   
-    const response = await fetch('/signup', {
+    const response = await fetch('users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
