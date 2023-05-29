@@ -1,6 +1,12 @@
 <div class="container">
     <h2>Your Dashboard</h2>
 
+    <form class="new-post-form">
+        <input type="text" name="post-title" placeholder="Title">
+        <textarea name="post-content" placeholder="Content"></textarea>
+        <button type="submit">Create a New Post</button>
+    </form>
+
     <a href="/new-post">Create a New Post</a>
 
     {{#each posts}}
