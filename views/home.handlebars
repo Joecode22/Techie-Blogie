@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>Homepage</h2>
+    {{#each posts}}
+    <div class="post">
+        <h3>{{this.title}}</h3>
+        <p>{{this.content}}</p>
+        <p>Posted by {{this.username}} on {{this.created_at}}</p>
+        <a href="/post/{{this.id}}">Read more</a>
+    </div>
+    {{/each}}
+</div>
