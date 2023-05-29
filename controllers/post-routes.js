@@ -1,7 +1,7 @@
-const withAuth = require('../../utils/auth');
+const withAuth = require('../utils/auth');
 const router = require('express').Router();
-const { Post, User, Comment } = require('../../models');
-const sequelize = require('../../config/connection');
+const { Post, User, Comment } = require('../models');
+const sequelize = require('../config/connection');
 const { Model } = require('sequelize');
 
 //GET request to fetch all posts
@@ -129,3 +129,5 @@ router.delete('/:id', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+module.exports = router;
