@@ -33,3 +33,12 @@ router.get('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+//GET request to fetch a single post
+router.get('/:id', async (req, res) => {
+    try {
+        const postData = await Post.findOne({
+            where: { id: req.params.id },
+            attributes: ['id', 'post_url', 'title', 'created_at',
+                [sequelize.literal('SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id')], 
+    }
