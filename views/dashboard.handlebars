@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Your Dashboard</h2>
+
+    <a href="/new-post">Create a New Post</a>
+
+    {{#each posts}}
+    <div class="post">
+        <h3>{{this.title}}</h3>
+        <p>{{this.content}}</p>
+        <p>Posted on {{this.created_at}}</p>
+        <a href="/post/{{this.id}}">Read more</a>
+        <a href="/post/{{this.id}}/edit">Edit</a>
+        <button class="delete-post" data-id="{{this.id}}">Delete</button>
+    </div>
+    {{/each}}
+</div>
