@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>Edit Post</h2>
+    <form id="edit-post-form">
+        <input type="text" id="title" name="title" value="{{post.title}}" required>
+        <textarea id="content" name="content" required>{{post.content}}</textarea>
+        <button type="submit">Update Post</button>
+    </form>
+    <button id="delete-post" data-id="{{post.id}}">Delete Post</button>
+</div>
+
+<script src="/js/post.js"></script>
