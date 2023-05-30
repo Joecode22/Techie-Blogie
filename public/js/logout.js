@@ -1,16 +1,19 @@
-// async function to handle logout
 async function logout() {
-    const response = await fetch('/api/users/logout', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' }
+    const response = await fetch('/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });
 
     if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/login');
     } else {
         alert(response.statusText);
     }
 }
 
-// event listener for logout link
-document.querySelector('#logout').addEventListener('click', logout);
+document.querySelector('a[href="/logout"]').addEventListener('click', function(event) {
+    event.preventDefault();
+    logout();
+});

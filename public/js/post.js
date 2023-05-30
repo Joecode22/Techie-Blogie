@@ -8,7 +8,7 @@ async function newFormHandler(event) {
     const post_content = document.querySelector('textarea[name="post-content"]').value;
 
     // use the add post route from your API 
-    const response = await fetch(`/api/posts`, {
+    const response = await fetch(`/posts`, {
         method: 'POST',
         body: JSON.stringify({
             title,
@@ -65,7 +65,7 @@ async function deleteClickHandler(event) {
     // get the post id from the delete button
     const id = event.target.getAttribute('data-id');
 
-    const response = await fetch(`/api/posts/${id}`, {
+    const response = await fetch(`/posts/${id}`, {
         method: 'DELETE',
     });
 

@@ -68,15 +68,36 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-router.get('/dashboard', (req, res) => {
-  // Add code here to handle the dashboard display
-  // For example, you might check if a user is logged in and 
-  // then display different information based on their user status
+router.get('/dashboard', withAuth, async (req, res) => {
   if (req.session.logged_in) {
-    res.render('dashboard', {loggedIn: true}); //Assuming you have a "dashboard" view setup
+    try {
+      const postData = await Post.findAll({
+        where: {
+          // use the ID from the session
+          user_id: req.session.user_id,
+        },
+        include: [
+          {
+            model: User,
+            attributes: ['username'],
+          },
+        ],
+      });
+
+      const posts = postData.map((post) => post.get({ plain: true }));
+
+      res.render('dashboard', {
+        posts,
+        logged_in: req.session.logged_in
+      });
+
+    } catch (err) {
+      res.status(500).json(err);
+    }
   } else {
-    res.redirect('/login'); // redirect to login page if not logged in
+    res.redirect('/login');
   }
 });
+
 
 module.exports = router;
