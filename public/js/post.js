@@ -1,18 +1,19 @@
 
 //function for creating a new post
 async function newFormHandler(event) {
+    console.log("There was a click on the new post button");
     event.preventDefault();
 
     // get the post title and content from the form
     const title = document.querySelector('input[name="post-title"]').value;
-    const post_content = document.querySelector('textarea[name="post-content"]').value;
+    const content = document.querySelector('textarea[name="post-content"]').value;
 
-    // use the add post route from your API 
+    // create a new post
     const response = await fetch(`/posts`, {
         method: 'POST',
         body: JSON.stringify({
             title,
-            post_content
+            content
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -40,11 +41,11 @@ async function editFormHandler(event) {
     const title = document.querySelector('input[name="post-title"]').value;
     const post_content = document.querySelector('textarea[name="post-content"]').value;
 
-    const response = await fetch(`/api/posts/${id}`, {
+    const response = await fetch(`/posts/${id}`, {
         method: 'PUT',
         body: JSON.stringify({
             title,
-            post_content
+            content
         }),
         headers: {
             'Content-Type': 'application/json'

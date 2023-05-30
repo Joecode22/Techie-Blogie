@@ -9,7 +9,7 @@ async function loginFormHandler(event) {
     // if the username and password fields are not empty
     if (username && password) {
         // fetch the login route and pass in the username and password as JSON
-        const response = await fetch('/api/users/login', {
+        const response = await fetch('/users/login', {
             method: 'post',
             body: JSON.stringify({
                 username,

@@ -80,9 +80,10 @@ router.post('/', withAuth, async (req, res) => {
             ...req.body,
             user_id: req.session.user_id,
         });
-
+        console.log('New post created:', newPost);
         res.status(200).json(newPost);
     } catch (err) {
+        console.log('Error while creating new post:', err);
         res.status(400).json(err);
     }
 });
