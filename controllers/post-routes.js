@@ -88,7 +88,7 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
-//this put route will update a post 
+
 router.put('/:id',  withAuth, async (req, res) => {
     try {
         const postData = await Post.update({
@@ -110,6 +110,37 @@ router.put('/:id',  withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+//route to render the edit-post.handlebars template
+router.get('/:id/edit', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findOne({
+            where: {
+                id: req.params.id,
+            },
+            attributes: ['id', 'post_url', 'title', 'created_at',],
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
+        });
+
+        if (!postData) {
+            res.status(404).json({ message: 'Error - no post with this id' });
+            return;
+        }
+
+        // Assume you're using Handlebars for your view engine
+        res.render('edit-post', { post: postData, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
+
 
 // this route will delete a post
 router.delete('/:id', withAuth, async (req, res) => {
